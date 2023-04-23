@@ -1,0 +1,25 @@
+<launch>
+
+   <!-- simulation environment -->
+    <include file="$(find simulate_environment)/launch/multiCamera.launch" />
+
+   <!-- load Parameters-->
+   <rosparam file="$(find avp_slam_plus)/config/configFile.yaml" command="load" />
+      
+   <!-- generate point cloud from RGBD images of multi cameras -->
+    <node name="pointCloudFromRGBD" pkg="avp_slam_plus" type="pointCloudFromRGBD" output="screen">
+    </node>
+
+　　<!-- relocated in prior map -->
+    <node name="localization" pkg="avp_slam_plus" type="localization" output="screen">
+   </node>
+
+   <!-- run odometry -->
+    <node name="Odometry" pkg="avp_slam_plus" type="Odometry.py" output="screen">
+   </node>
+   
+   <!-- convert qt to rpy -->
+    <node name="qt" pkg="convert_orientation" type="qt" output="screen">
+   </node>
+
+</launch>

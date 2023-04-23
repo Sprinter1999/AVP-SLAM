@@ -1,0 +1,3 @@
+# x pointing forward and y pointing left
+x_coordinate: [5,  5,  2,  2,  5,  5,  0,  0]
+y_coordinate: [0, -3, -3, -6, -6, -9, -9,  0]

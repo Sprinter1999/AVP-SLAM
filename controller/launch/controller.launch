@@ -1,0 +1,10 @@
+<launch>
+
+   <!-- load Parameters -->
+   <rosparam file="$(find controller)/config/configFile.yaml" command="load" />
+
+   <!-- run controller -->
+   <node name="odom_controller" pkg="controller" type="odom_controller.py" output="screen">
+   </node>
+
+</launch>

@@ -1,0 +1,31 @@
+fileName: "8x8_sq"
+dataFile: "/home/catkin_ws/src/AVP-SLAM-PLUS/parse_rosbag/data/"
+tooFar: 0.1
+ignoredVertexes: 300
+
+# Iniital guess for Factor Graph
+initialPose: [0,0,0]
+initialCov: [0.3, 0.0, 0.0,
+             0.0, 0.3, 0.0,
+             0.0, 0.0, 0.1]
+
+# covariance for odometry edges
+odomCovXX: 0.1
+odomCovYY: 0.1
+odomCovTT: 0.3
+# hard code cross covariance with 0
+
+# covariance for loop closure edges
+maxCovXX: 1
+maxCovYY: 1
+maxCovTT: 1
+# hard code cross covariance with 0
+
+# Batch solution params
+relativeErrorTol: 0.00001
+maxIterations: 100
+
+# ISAM2 params
+relinearizeThreshold: 0.01
+relinearizeSkip: 1
+

@@ -1,0 +1,41 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# rosbags and g2o files
+/parse_rosbag/data/g2o/*.g2o
+/parse_rosbag/data/rosbag/*.bag
+/parse_rosbag/data/GroundTruth/*.g2o
+/parse_rosbag/data/odometry/*.g2o
+
+# videos
+*.mp4
