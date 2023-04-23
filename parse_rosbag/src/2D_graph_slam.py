@@ -12,7 +12,7 @@ from gtsam import NonlinearFactorGraph,PriorFactorPose2,noiseModel_Gaussian,nois
 # VERTEX_SE2 or EDGE_SE2. The first return is a list of vertexes (i,Pose2) and the second retur is
 # a list of edges (BetweenFactorPose2)
 #TODO:
-# 读取.g2o文件，假设它是正确格式的，并且只包含以VERTEX_SE2或EDGE_SE2开头的行。
+# 读取.g2o，假设它是正确格式的，并且只包含以VERTEX_SE2或EDGE_SE2开头的行。
 # vertex_SE2_list包含表示图中顶点的元组。每个元组包含一个整数ID i和一个Pose2对象，表示该顶点的位置和方向。
 # edge_SE2_list包含表示图中边的BetweenFactorPose2对象。
 # 每个BetweenFactorPose2对象包含四个参数：i和j（连接边缘的两个顶点的ID），一个Pose2对象，表示两个顶点之间的相对姿态，以及一个noiseModel_Gaussian.Covariance对象，表示相对姿态测量的不确定性。
@@ -69,7 +69,8 @@ def readSE2(file):
 #TODO:
 # 首先，该函数将读取的顶点和边列表分别赋值给 vertexes 和 edges 变量。
 # 然后，创建一个 NonlinearFactorGraph 对象 graph，并在第一个姿态上添加一个先验因子，将其设置为原点。
-# 接下来，将所有的边作为 odometry 因子添加到图中。然后，创建一个 Values 对象 initialEstimate，用于存储初始估计值。将每个顶点插入到 initialEstimate 中。接着，使用 Gauss-Newton 非线性优化器对初始值进行优化，产生一个优化结果 result。最后，将优化后的位姿结果存储在一个列表 resultPoses 中，并将结果绘制为图形。
+# 接下来，将所有的边作为 odometry 因子添加到图中。然后，创建一个 Values 对象 initialEstimate，用于存储初始估计值。将每个顶点插入到 initialEstimate 中。
+# 接着，使用 Gauss-Newton 非线性优化器对初始值进行优化，产生一个优化结果 result。最后，将优化后的位姿结果存储在一个列表 resultPoses 中，并将结果绘制为图形。
 def batchSolution(output,GT,Odom):
     vertexes = output[0]
     edges = output[1]
@@ -124,12 +125,18 @@ def batchSolution(output,GT,Odom):
 
     return resultPoses
 
+
+
+#TODO:
+
 # incremental solution using ISAM2 using vertexes and edges from parse_rosbag.cpp
 # GT and Odom are only used for plotting as a comparion
 def incrementalSolution(output,GT,Odom):
+    # 从输出参数output中分别获取节点和边的信息；
     vertexes = output[0]
     edges = output[1]
 
+    # 初始化iSAM2算法，并设置一些算法参数，如重线性化阈值和重线性化间隔；
     parameters = ISAM2Params()
     parameters.setRelinearizeThreshold(relinearizeThreshold)
     parameters.setRelinearizeSkip(relinearizeSkip)
@@ -138,6 +145,7 @@ def incrementalSolution(output,GT,Odom):
     isam.calculateEstimate()
 
     # Loop over the poses, adding the observations to iSAM incrementally
+    # # 对于每个节点，根据其前一个节点的位姿信息和当前节点与其它节点之间的运动约束，构建一个非线性因子图，并将初始位姿估计值插入到图中；
     for vertex in vertexes:
         graph = NonlinearFactorGraph()
         initialEstimate = Values()
@@ -154,10 +162,13 @@ def incrementalSolution(output,GT,Odom):
                 if(edge.keys().at(1)==vertex[0]):
                     graph.add(edge)
 
+        # 调用iSAM2的update()函数，将当前图和位姿估计值传入算法中进行优化；
+        # 调用iSAM2的calculateEstimate()函数，计算出优化后的位姿估计值；
         isam.update(graph,initialEstimate)
         result = isam.calculateEstimate()
 
     #store resulting poses
+    # 将优化后的位姿信息存储在resultPoses中。
     resultPoses = []
     for key in range(result.keys().size()):
         resultPoses.append((result.keys().at(key),result.atPose2(key)))
@@ -185,6 +196,7 @@ def incrementalSolution(output,GT,Odom):
 
     return resultPoses
 
+#TODO: not used
 def downSample(GT, Odom):
 
     downSample_GT = []
@@ -203,6 +215,7 @@ def downSample(GT, Odom):
 
     return downSample_GT, downSample_Odom
 
+#
 def calculateRMSE(x, y, GT_x, GT_y):
     return np.sqrt(np.mean((x - GT_x)**2 + (y - GT_y)**2))
 

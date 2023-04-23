@@ -12,6 +12,8 @@ ros::Publisher yaw_publisher;
 ros::Subscriber quat_subscriber;
 ros::Publisher odom_yaw_publisher;
 ros::Subscriber odom_quat_subscriber;
+
+//TODO:分别将IMU和Odom的四元数转换为欧拉角
 void QuaternionCallback(const sensor_msgs::Imu msg)
 {
     double roll, pitch, yaw;
@@ -54,6 +56,9 @@ void OdomQuaternionCallback(const nav_msgs::Odometry odom_msg)
     // ROS_INFO("published odom yaw angle(degrees): yaw=%f", rpy.pose.position.z*180/M_PI);
 }
 
+
+//TODO:
+// 订阅IMU和里程计(Odom)的四元数(quaternion)数据，并将对应的航向(yaw)角度转换为欧拉角(euler angle)后发布到对应的主题上
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "quaternion");

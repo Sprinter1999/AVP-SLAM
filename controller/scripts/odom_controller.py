@@ -7,7 +7,7 @@ from nav_msgs.msg import Odometry
 
 
 '''
-A Path following controller that drive the robot to a given sequence of x and y coordinates
+TODO: A Path following controller that drive the robot to a given sequence of x and y coordinates given in controller/configFile.yaml
 '''
 
 

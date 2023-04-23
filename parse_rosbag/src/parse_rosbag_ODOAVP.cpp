@@ -1,6 +1,9 @@
+//TODO: this repo use this ODOAVP
+
 // parse through a rosbag and form vertexes and edges to save in g2o format.
 // Vertexes are from AVP-SLAM-PLUS
 // Edges are added between each vertex using transformations between the closest odometry
+//TODO: 需要明确这里是如何进行回环检测的，vertexes overlap by a defined threshold是什么意思？
 // Loop closure edges are added when vertexes overlap by a defined threshold
 
 #include <iostream>

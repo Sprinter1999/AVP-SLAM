@@ -1,7 +1,7 @@
-# AVP-SLAM++
+# AVP-SLAM+++
 **Authors**: [Vivek Jaiswal](mailto:vjaiswal@umich.edu), [Harsh Jhaveri](mailto:hjhaveri@umich.edu), [Chun-Hsueh Lee](mailto:chunhlee@umich.edu), [Devin McCulley](mailto:devmccu@umich.edu)
 AVP-SLAM++ is an extension on the AVP-SLAM-PLUS repository initially implemented by [Liu Guitao](mailto:liuguitao@sia.cn). 
-We fork this repo and make some changes to the original code, and many thanks to [rob530-w22-team25](https://github.com/rob530-w22-team25/AVP-SLAM-PLUS).
+We fork previous forked repos to our AVP-SLAM+++ and make some changes to the original code of AVP-SLAM++, and many thanks to [rob530-w22-team25](https://github.com/rob530-w22-team25/AVP-SLAM-PLUS).
 
 ## AVP-SLAM-PLUS Overview
 AVP-SLAM-PLUS is an implementation of [AVP-SLAM: Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot (IROS 2020)](https://arxiv.org/abs/2007.01813) with some new contributions including:

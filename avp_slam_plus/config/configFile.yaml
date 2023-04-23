@@ -22,7 +22,8 @@ farPointThresh: 20
 closePointThresh: 0.1
 
 mapSave: true
-mapSaveLocation: "/home/vipuser/catkin_ws/src/AVP-SLAM-PLUS/avp_slam_plus/data/laserCloudMap.pcd"
+# maybe jacklee should change this to your own path
+mapSaveLocation: "/home/jacklee/catkin_ws/src/AVP-SLAM-PLUS/avp_slam_plus/data/laserCloudMap.pcd"
 odomKeyFramDisThresh: 1.0
 InvalidColorThresh: 60
 useICP: false
