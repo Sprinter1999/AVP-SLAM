@@ -78,6 +78,7 @@ def odom_callback(data):
     v = v_actual
     w = w_actual
     o_R = np.array([[(odom_c1* abs(v)+odom_c2*abs(w))**2, 0], [0, (odom_c3* abs(v)+odom_c4*abs(w))**2]]) + 1e-10
+    # 这里再次加了一次噪声，来模拟真实运动的噪声
     o_rand = np.random.multivariate_normal([v, w], o_R)
     v_odom = o_rand[0]
     w_odom = o_rand[1]

@@ -18,8 +18,10 @@
 
     <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find simulate_robot)/urdf/robot_with_realsense.urdf.xacro'" /> 
 
+<!-- 通过Gazebo的ROS接口来获取机器人的关节状态信息，包括关节的当前位置、速度和加速度等等, 并将其转换为JointState消息进行发布,用于机器人的控制和运动规划。 -->
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
 
+<!-- 实现对机器人的控制和感知。robot_state_publisher节点通常与Gazebo仿真环境一起使用，可以在仿真中实时计算机器人的状态 -->
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
         <param name="publish_frequency" type="double" value="50.0" />
     </node>

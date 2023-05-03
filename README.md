@@ -153,7 +153,7 @@ If you previously ran SLAM and "save map", you can do localization in the prior 
 ```
 
 ### 3.3 **Pose Graph Optimization**
-Open a new terminl and follow these steps if you wish to optimize the trajectory offline.
+Open a new terminl and follow these steps if you wish to **optimize the trajectory offline**.
 
 You should run all the .sh file under **/catkin_ws**
 
